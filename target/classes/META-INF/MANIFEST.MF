@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Built-By: rabiamehta
+Build-Jdk: 14.0.2
+Implementation-Title: Spring Boot Web Thymeleaf
+Implementation-Version: 1.0
+Implementation-Vendor-Id: org.springframework.boot
+Implementation-URL: https://projects.spring.io/spring-boot/#/spring-boot
+ -starter-parent/welcomeDevOps
+Created-By: Maven Integration for Eclipse
+
