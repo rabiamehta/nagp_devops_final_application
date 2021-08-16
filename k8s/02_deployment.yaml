@@ -31,13 +31,13 @@ spec:
         -  name: EMP_NAME
            valueFrom:
              configMapKeyRef:
-                key: employee_name
-                name: empname
+                key: empname
+                name: nagp-feature-cm
         -  name: EMP_CODE
            valueFrom:
              configMapKeyRef:
-                key: employee_CODE
-                name: empid
+                key: empid
+                name: nagp-feature-cm
         resources:
           limits:
             cpu: 0.2
