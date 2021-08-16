@@ -2,6 +2,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: nagp-feature-cm
+  namespace: nagp
 data:
   # property-like keys; each key maps to a simple value
   empname: 'rabia'
