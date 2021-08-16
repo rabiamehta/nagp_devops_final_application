@@ -32,12 +32,12 @@ spec:
            valueFrom:
              configMapKeyRef:
                 key: employee_name
-                name: empName
+                name: empname
         -  name: EMP_CODE
            valueFrom:
              configMapKeyRef:
                 key: employee_CODE
-                name: empId
+                name: empid
         resources:
           limits:
             cpu: 0.2

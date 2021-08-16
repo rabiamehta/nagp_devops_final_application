@@ -4,5 +4,5 @@ metadata:
   name: nagp-feature-cm
 data:
   # property-like keys; each key maps to a simple value
-  empName: 'rabia'
-  empId: '3149923'
+  empname: 'rabia'
+  empid: '3149923'
