@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nagp-deployment-feature
+  namespace: nagp
+  labels:
+    app: nagp
+    branch: feature
+spec:
+  replicas: 3
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 2
+      maxUnavailable: 0
+  selector:
+    matchLabels:
+      app: nagp
+      branch: feature
+  template:
+    metadata:
+      labels:
+        app: nagp
+        branch: feature
+    spec:
+      containers:
+      - name: devopsWelcome-feature
+        image: rabiamehta/i-rabia-feature
+        imagePullPolicy: Always
+        env:
+        -  name: EMP_NAME
+           valueFrom:
+             configMapKeyRef:
+                key: employee_name
+                name: empName
+        -  name: EMP_CODE
+           valueFrom:
+             configMapKeyRef:
+                key: employee_CODE
+                name: empId
+        resources:
+          limits:
+            cpu: 0.2
+            memory: "200Mi"
+          requests:
+            cpu: 0.1
+            memory: "100Mi"
+        ports:
+        - containerPort: 8080
