@@ -50,15 +50,15 @@ pipeline{
 
         stage('Build Docker Image'){
             steps{
-                bat "docker build -t ${DOCKER_REPO_NAME}/i-${USERNAME}-${env.BRANCH_NAME}:${BUILD_NUMBER} -t ${DOCKER_REPO_NAME}/i-${USERNAME}-${env.BRANCH_NAME}:latest ."
+                bat "docker build -t ${DOCKER_REPO_NAME}/i-${USERNAME}-${BRANCH_NAME}:${BUILD_NUMBER} -t ${DOCKER_REPO_NAME}/i-${USERNAME}-${BRANCH_NAME}:latest ."
             }
         }
 
         stage('Publish to DCR'){
             steps{
                 withDockerRegistry([credentialsId: 'DockerHub', url: ""]){
-                    bat "docker push ${DOCKER_REPO_NAME}/i-${USERNAME}-${env.BRANCH_NAME}:${BUILD_NUMBER}"
-                    bat "docker push ${DOCKER_REPO_NAME}/i-${USERNAME}-${env.BRANCH_NAME}:latest "
+                    bat "docker push ${DOCKER_REPO_NAME}/i-${USERNAME}-${BRANCH_NAME}:${BUILD_NUMBER}"
+                    bat "docker push ${DOCKER_REPO_NAME}/i-${USERNAME}-${BRANCH_NAME}:latest "
                 }
             }
         }
@@ -69,17 +69,17 @@ pipeline{
                     steps{
                         script{
                             echo 'pre-container check'
-                            containerIdCheck = "${bat (script: "docker ps -a -q -f status=running -f name=c-${USERNAME}-${env.BRANCH_NAME}", returnStdout: true).trim().readLines().drop(1).join("")}"
+                            containerIdCheck = "${bat (script: "docker ps -a -q -f status=running -f name=c-${USERNAME}-${BRANCH_NAME}", returnStdout: true).trim().readLines().drop(1).join("")}"
                             if(containerIdCheck != ''){
                                 echo 'container is already running'
-                                bat "docker stop c-${USERNAME}-${env.BRANCH_NAME}"
-                                bat "docker rm c-${USERNAME}-${env.BRANCH_NAME}"
+                                bat "docker stop c-${USERNAME}-${BRANCH_NAME}"
+                                bat "docker rm c-${USERNAME}-${BRANCH_NAME}"
                             }else{
                                 echo 'container is not running'
                             }
 
                             echo 'do docker deployment'
-                            bat "docker run --name c-${USERNAME}-${env.BRANCH_NAME} -d -p ${DOCKER_FEATURE_PORT}:${APP_PORT} ${DOCKER_REPO_NAME}/i-${USERNAME}-${env.BRANCH_NAME}:latest"
+                            bat "docker run --name c-${USERNAME}-${BRANCH_NAME} -d -p ${DOCKER_FEATURE_PORT}:${APP_PORT} ${DOCKER_REPO_NAME}/i-${USERNAME}-${BRANCH_NAME}:latest"
                         }
                     }
                 }

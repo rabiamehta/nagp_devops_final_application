@@ -24,7 +24,7 @@ spec:
         branch: feature
     spec:
       containers:
-      - name: devopsWelcome-feature
+      - name: devopswelcome-feature
         image: rabiamehta/i-rabia-feature
         imagePullPolicy: Always
         env:
